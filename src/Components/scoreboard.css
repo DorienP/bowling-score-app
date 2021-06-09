@@ -4,13 +4,24 @@
 }
 
 .frame {
-    height:150px;
+    height: 150px;
     width: 150px;
-
     border-style: solid;
     border-color: crimson;
-    
+    border-radius: 10px;
     display: flex;
-    justify-content: center;
 }
 
+.number {
+    margin: 0px;
+}
+
+.frame-number {
+    display: flex;
+    width: 150px;
+    height: 25px;
+    align-self: flex-start;
+    justify-content: center;
+    border-style: solid;
+    border-color:crimson;
+}
