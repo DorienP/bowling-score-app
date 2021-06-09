@@ -1,0 +1,16 @@
+.scoreBoard {
+    display: flex;
+    justify-content:center;
+}
+
+.frame {
+    height:150px;
+    width: 150px;
+
+    border-style: solid;
+    border-color: crimson;
+    
+    display: flex;
+    justify-content: center;
+}
+
