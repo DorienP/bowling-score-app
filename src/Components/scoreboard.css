@@ -1,4 +1,4 @@
-.scoreBoard {
+.ScoreBoard {
     display: flex;
     justify-content:center;
 }
@@ -10,6 +10,7 @@
     border-color: crimson;
     border-radius: 10px;
     display: flex;
+    flex-direction: column;
 }
 
 .number {
@@ -25,3 +26,44 @@
     border-style: solid;
     border-color:crimson;
 }
+
+#frame-score-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.first-shot {
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 50px;
+}
+
+/* last shot 1-9 frames === second-shot */
+.last-shot {
+    border-bottom-style: ridge;
+    border-left-style: ridge;
+    height: 50px;
+    width: 50px;
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+}
+
+/* second shot is for frame 10 only */
+.second-shot {
+    height: 50px;
+    width:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.frame-score-num {
+    margin-left: 10px;
+}
+
+

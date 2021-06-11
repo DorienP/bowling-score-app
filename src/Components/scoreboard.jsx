@@ -1,55 +1,175 @@
-import './scoreboard.css';
+import './Scoreboard.css';
 export default function ScoreBoard() {
     return (
-        <div className="scoreBoard">
-            <div className="frame 1">
+        <div className="ScoreBoard" data-testid="Scoreboard">
+            {/* First Frame */}
+            <div className="frame frame_1">
                 <div className="frame-number">
                     <h2 className="number">1</h2>
                 </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="1-first-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="1-last-shot">X</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="1-frame-result">25</h2>
+                </div>
             </div>
-            <div className="frame 2">
-            <div className="frame-number">
+            {/* Second Frame */}
+            <div className="frame frame_2">
+                <div className="frame-number">
                     <h2 className="number">2</h2>
                 </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="2-first-shot" > </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="2-last-shot">/</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="2-frame-result">40</h2>
+                </div>
             </div>
-            <div className="frame 3">
-            <div className="frame-number">
+            {/* Third Frame */}
+            <div className="frame frame_3">
+                <div className="frame-number">
                     <h2 className="number">3</h2>
                 </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="3-first-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="3-last-shot">X</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="3-frame-result">25</h2>
+                </div>
             </div>
-            <div className="frame 4">
-            <div className="frame-number">
+            {/* Fourth Frame */}
+            <div className="frame frame_4">
+                <div className="frame-number">
                     <h2 className="number">4</h2>
                 </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="4-first-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="4-last-shot">X</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="4-frame-result">25</h2>
+                </div>
             </div>
-            <div className="frame 5">
-            <div className="frame-number">
+            {/* Fifth Frame */}
+            <div className="frame frame_5">
+                <div className="frame-number">
                     <h2 className="number">5</h2>
                 </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="5-first-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="5-last-shot">X</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="5-frame-result">25</h2>
+                </div>
             </div>
-            <div className="frame 6">
-            <div className="frame-number">
+            {/* Sixth Frame */}
+            <div className="frame frame_6">
+                <div className="frame-number">
                     <h2 className="number">6</h2>
                 </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="6-first-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="6-last-shot">X</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="6-frame-result">25</h2>
+                </div>
             </div>
-            <div className="frame 7">
-            <div className="frame-number">
+            {/* Seventh Frame */}
+            <div className="frame frame_7">
+                <div className="frame-number">
                     <h2 className="number">7</h2>
                 </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="7-first-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="7-last-shot">X</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="7-frame-result">25</h2>
+                </div>
             </div>
-            <div className="frame 8">
-            <div className="frame-number">
+            {/* Eigth Frame */}
+            <div className="frame frame_8">
+                <div className="frame-number">
                     <h2 className="number">8</h2>
                 </div>
-            </div>
-            <div className="frame 9">
-            <div className="frame-number">
-                    <h2 className="number">9</h2>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="8-first-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="8-last-shot">X</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="8-frame-result">25</h2>
                 </div>
             </div>
-            <div className="frame 10">
-            <div className="frame-number">
+            {/* Ninth Frame */}
+            <div className="frame frame_9">
+                <div className="frame-number">
+                    <h2 className="number">9</h2>
+                </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="9-first-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="9-last-shot">X</h2>
+                    </div>
+                </div>
+                <div className="frame-score-num">
+                    <h2 id="9-frame-result">25</h2>
+                </div>
+            </div>
+            {/* Tenth Frame */}
+            <div className="frame frame_10">
+                <div className="frame-number">
                     <h2 className="number">10</h2>
+                </div>
+                <div id="frame-score-container">
+                    <div className="first-shot">
+                        <h2 id="10-first-shot">200</h2>
+                    </div>
+                    <div className="second-shot">
+                        <h2 id="10-second-shot"> </h2>
+                    </div>
+                    <div className="last-shot">
+                        <h2 id="10-last-shot"> </h2>
+                    </div>
                 </div>
             </div>
         </div>
