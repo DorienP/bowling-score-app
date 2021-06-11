@@ -1,5 +1,5 @@
 import './Scoreboard.css';
-export default function ScoreBoard() {
+export default function ScoreBoard({gameOver, setGameOver}) {
     return (
         <div className="ScoreBoard" data-testid="Scoreboard">
             {/* First Frame */}
@@ -172,6 +172,7 @@ export default function ScoreBoard() {
                     </div>
                 </div>
             </div>
+            {gameOver ? <div>Game Over</div>: null}
         </div>
     );
 }
