@@ -12,11 +12,11 @@ export default function ScoreBoard() {
                         <h2 id="1-first-shot"> </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="1-last-shot">X</h2>
+                        <h2 id="1-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="1-frame-result">25</h2>
+                    <h2 id="1-frame-result"> </h2>
                 </div>
             </div>
             {/* Second Frame */}
@@ -29,11 +29,11 @@ export default function ScoreBoard() {
                         <h2 id="2-first-shot" > </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="2-last-shot">/</h2>
+                        <h2 id="2-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="2-frame-result">40</h2>
+                    <h2 id="2-frame-result"> </h2>
                 </div>
             </div>
             {/* Third Frame */}
@@ -46,11 +46,11 @@ export default function ScoreBoard() {
                         <h2 id="3-first-shot"> </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="3-last-shot">X</h2>
+                        <h2 id="3-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="3-frame-result">25</h2>
+                    <h2 id="3-frame-result"> </h2>
                 </div>
             </div>
             {/* Fourth Frame */}
@@ -63,11 +63,11 @@ export default function ScoreBoard() {
                         <h2 id="4-first-shot"> </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="4-last-shot">X</h2>
+                        <h2 id="4-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="4-frame-result">25</h2>
+                    <h2 id="4-frame-result"> </h2>
                 </div>
             </div>
             {/* Fifth Frame */}
@@ -80,11 +80,11 @@ export default function ScoreBoard() {
                         <h2 id="5-first-shot"> </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="5-last-shot">X</h2>
+                        <h2 id="5-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="5-frame-result">25</h2>
+                    <h2 id="5-frame-result"> </h2>
                 </div>
             </div>
             {/* Sixth Frame */}
@@ -97,11 +97,11 @@ export default function ScoreBoard() {
                         <h2 id="6-first-shot"> </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="6-last-shot">X</h2>
+                        <h2 id="6-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="6-frame-result">25</h2>
+                    <h2 id="6-frame-result"> </h2>
                 </div>
             </div>
             {/* Seventh Frame */}
@@ -114,11 +114,11 @@ export default function ScoreBoard() {
                         <h2 id="7-first-shot"> </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="7-last-shot">X</h2>
+                        <h2 id="7-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="7-frame-result">25</h2>
+                    <h2 id="7-frame-result"> </h2>
                 </div>
             </div>
             {/* Eigth Frame */}
@@ -131,11 +131,11 @@ export default function ScoreBoard() {
                         <h2 id="8-first-shot"> </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="8-last-shot">X</h2>
+                        <h2 id="8-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="8-frame-result">25</h2>
+                    <h2 id="8-frame-result"> </h2>
                 </div>
             </div>
             {/* Ninth Frame */}
@@ -148,11 +148,11 @@ export default function ScoreBoard() {
                         <h2 id="9-first-shot"> </h2>
                     </div>
                     <div className="last-shot">
-                        <h2 id="9-last-shot">X</h2>
+                        <h2 id="9-last-shot"> </h2>
                     </div>
                 </div>
                 <div className="frame-score-num">
-                    <h2 id="9-frame-result">25</h2>
+                    <h2 id="9-frame-result"> </h2>
                 </div>
             </div>
             {/* Tenth Frame */}
@@ -162,7 +162,7 @@ export default function ScoreBoard() {
                 </div>
                 <div id="frame-score-container">
                     <div className="first-shot">
-                        <h2 id="10-first-shot">200</h2>
+                        <h2 id="10-first-shot"> </h2>
                     </div>
                     <div className="second-shot">
                         <h2 id="10-second-shot"> </h2>
