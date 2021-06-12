@@ -171,6 +171,9 @@ export default function ScoreBoard({gameOver, setGameOver}) {
                         <h2 id="10-last-shot"> </h2>
                     </div>
                 </div>
+                <div className="frame-score-num">
+                    <h2 id="10-frame-result"> </h2>
+                </div>
             </div>
             {gameOver ? <div>Game Over</div>: null}
         </div>
