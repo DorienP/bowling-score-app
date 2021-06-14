@@ -1,5 +1,9 @@
+import React from 'react';
 import './Scoreboard.css';
 export default function ScoreBoard({gameOver, setGameOver}) {
+
+    
+
     return (
         <div className="ScoreBoard" data-testid="Scoreboard">
             {/* First Frame */}
