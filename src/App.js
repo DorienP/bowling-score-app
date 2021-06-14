@@ -10,22 +10,22 @@ function App() {
   const [frame, setFrame] = useState("1");
   const [shot, setShot] = useState(1);
   const [totalShots, setTotalShots] = useState(0);
+  // eslint-disable-next-line
   const [shotScores, setShotScores] = useState({});
+  // eslint-disable-next-line
   const [frameScore, setFrameScore] = useState({});
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [spare, setSpare] = useState(false);
   // eslint-disable-next-line
   const [strike, setStrike] = useState(false);
+  // eslint-disable-next-line
   const [strikeCount, setStrikeCount] = useState(2);
+  // eslint-disable-next-line
   const [strikeOrSpareFrames, setStrikeOrSpareFrames] = useState({});
 
-  const previousFrameResult = (previousFrame) => {
-    // shotScores[previousFrame]
-  }
 
   const updateFrame = (frame, e, shot, spare=false, strike=false) => {
-    console.log(shot, e);
     if (frameScore[frame] === undefined) {
       frameScore[frame] = {
         frame: frame,
@@ -60,7 +60,7 @@ function App() {
       frameScore[frame].lastShot = { shotNumber: totalShots, score: Number(e) };
     }
 
-    if (frameScore[frame].lastShot !== null && frame !== "10") {
+    if (shot === 2 && frame !== "10" && frameScore[frame].lastShot.score !== 10 && frameScore[frame].lastShot !== null) {
       frameScore[frame].totalScore = frameScore[frame].lastShot.score + frameScore[frame].firstShot.score;
     } 
     if (frameScore[frame].lastShot !== null && frame === "10") {
@@ -135,38 +135,23 @@ function App() {
         setScore(score + 30);
       }
     }
+    if (Number(frame) > 2 && frameScore[(Number(frame) - 2).toString()].strike && frameScore[(Number(frame) - 2).toString()].strike_second_shot === null) {
+      frameScore[(Number(frame) - 2).toString()].strike_second_shot = shotScores[frameScore[(Number(frame) - 2).toString()].lastShot.shotNumber + 2];
+      frameScore[(Number(frame) - 2).toString()].totalScore = frameScore[(Number(frame) - 2).toString()].strike_first_shot + frameScore[(Number(frame) - 2).toString()].strike_second_shot + score + 10;
+      document.getElementById(`${(Number(frame) - 2).toString()}-frame-result`).innerText = frameScore[(Number(frame) - 2).toString()].totalScore;
+      setScore(frameScore[(Number(frame) - 2).toString()].totalScore);
+    }
 
     if (frame === "10" && frameScore[(Number(frame) - 2).toString()].totalScore === null && frameScore[(Number(frame) - 2).toString()].strike) {
       frameScore[(Number(frame) - 2).toString()].totalScore = shotScores[frameScore[frame].firstShot.shotNumber + 1] + shotScores[frameScore[frame].secondShot.shotNumber + 2];
 
     }
 
-    // if (strike && strikeCount === 1) {
-    //   console.log(strike, shot);
-    //   if (document.getElementById(`${frame}-first-shot`) === "") {
-    //     setStrike(strike.push(Number(document.getElementById(`${frame}-last-shot`).innerText)));
-    //   } else {
-    //     setStrike(strike.push(Number(document.getElementById(`${frame}-first-shot`).innerText)));
-    //   }
-    // }
-    // if (strike[0] && strikeCount === 0) {
-    //   console.log(strike, shot);
-    //   if (document.getElementById(`${frame}-last-shot`) !== "") {
-    //     setStrike(strike[2] += Number(document.getElementById(`${frame}-last-shot`).innerText));
-    //   } else {
-    //     setStrike(strike[2] += Number(document.getElementById(`${frame}-first-shot`).innerText));
-    //   }
-    //   setScore(score + strike[2]);
-
-    //   document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + strike[2]);
-    //   setStrike(false);
-    // }
   }
 
   const scoreKeeper = (e) => {
     // TENTH FRAME
     if (frame === "10") {
-      debugger;
       if (shot === 1 && e === "0") {
         document.getElementById(`${frame}-first-shot`).innerText = e;
         shotScores[totalShots] = Number(e);
@@ -243,6 +228,7 @@ function App() {
       }
       // NOT TENTH FRAME
     } else {
+      debugger;
       if (shot === 1 && e !== "10") {
         document.getElementById(`${frame}-first-shot`).innerText = e;
         shotScores[totalShots] = Number(e);
@@ -289,13 +275,16 @@ function App() {
   useEffect(() => {
     setTotalShots(totalShots + 1);
     if (frame !== "10") checkForBonus();
-    console.log(score, shot, totalShots, frameScore, strikeOrSpareFrames);
-    console.log("ShotScores: ", shotScores);
+    console.log(frameScore, shotScores)
+    // eslint-disable-next-line
   }, [shot])
 
   return (
     <div className="App">
       <PinSelection scoreKeeper={scoreKeeper} />
+      {gameOver ? 
+      <div>Game Over </div> : null
+      }
       <Scoreboard gameOver={gameOver} setGameOver={setGameOver} />
     </div>
   );
