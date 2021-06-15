@@ -43,6 +43,9 @@ function App() {
     if (shot === 1 && Number(e) && frame === "10") {
       frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
     } 
+    if (shot === 1 && frame !== "10" && Number(e) === 0) {
+      frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
+    }
     if (shot === 1 && Number(e) && !strike &&  frame !== "10") {
       frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
     } else if (strike && frame !== "10") {
@@ -59,8 +62,7 @@ function App() {
     if (shot === 3 && frame === "10") {
       frameScore[frame].lastShot = { shotNumber: totalShots, score: Number(e) };
     }
-
-    if (shot === 2 && frame !== "10" && frameScore[frame].lastShot.score !== 10 && frameScore[frame].lastShot !== null) {
+    if (shot === 2 && frame !== "10" && frameScore[frame].lastShot.score < 10 && frameScore[frame].lastShot !== null) {
       frameScore[frame].totalScore = frameScore[frame].lastShot.score + frameScore[frame].firstShot.score;
     } 
     if (frameScore[frame].lastShot !== null && frame === "10") {
@@ -71,7 +73,11 @@ function App() {
   // if frame does not === strike or spare
   const frameResult = (e) => {
     const frameResult = e;
-    document.getElementById(`${frameResult}-frame-result`).innerText = (Number(document.getElementById(`${frame}-first-shot`).innerText) + Number(document.getElementById(`${frame}-last-shot`).innerText) + score);
+    if (frame === "10" && document.getElementById(`${frameResult}-second-shot`).innerText !== "") {
+      document.getElementById(`${frameResult}-frame-result`).innerText = (Number(document.getElementById(`${frameResult}-first-shot`).innerText) + Number(document.getElementById(`${frameResult}-second-shot`).innerText) + score);
+    }else {
+      document.getElementById(`${frameResult}-frame-result`).innerText = (Number(document.getElementById(`${frameResult}-first-shot`).innerText) + Number(document.getElementById(`${frameResult}-last-shot`).innerText) + score);
+    }
     setScore(Number(document.getElementById(`${frameResult}-frame-result`).innerText));
   }
 
@@ -213,6 +219,7 @@ function App() {
           updateFrame(frame, e, 2, false, false);
           checkForBonus();
           setShot(1);
+          frameResult(frame);
           setGameOver(true);
         } else {
           if ((document.getElementById(`${frame}-first-shot`).innerText === "X" ||
@@ -281,9 +288,14 @@ function App() {
 
   return (
     <div className="App">
+      <div id="bowling-pins">
+      <div id="pin-1"></div>
+      </div>
       <PinSelection scoreKeeper={scoreKeeper} />
       {gameOver ? 
-      <div>Game Over </div> : null
+      <div>
+        <h1>Game Over</h1> 
+      </div> : null
       }
       <Scoreboard gameOver={gameOver} setGameOver={setGameOver} />
     </div>

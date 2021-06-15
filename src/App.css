@@ -5,3 +5,18 @@
   justify-content: center;
   align-items: center;
 }
+
+#bowling-pins {
+  height: 500px;
+  width: 900px;
+  margin-bottom: 20px;
+  background-image: url(./public/6-69239_bowling-lane-clip-art-free-bowling-alley-without.png);
+}
+
+#pin-1 {
+  position: absolute;
+
+  background-image: url(./public/singlePin.png);
+  width: 90px;
+  height: 90px;
+}

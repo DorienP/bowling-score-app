@@ -179,7 +179,6 @@ export default function ScoreBoard({gameOver, setGameOver}) {
                     <h2 id="10-frame-result"> </h2>
                 </div>
             </div>
-            {gameOver ? <div>Game Over</div>: null}
         </div>
     );
 }
