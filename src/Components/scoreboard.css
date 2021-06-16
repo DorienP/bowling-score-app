@@ -1,7 +1,7 @@
 .ScoreBoard {
     display: flex;
     justify-content:center;
-    width: 100%;
+    width: 105%;
     flex-wrap: wrap;
 }
 
@@ -22,7 +22,7 @@
 .frame-number {
     display: flex;
     width: 150px;
-    height: 25px;
+    height: 30%;
     align-self: center;
     justify-content: center;
     border-style: solid;

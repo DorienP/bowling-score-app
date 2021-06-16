@@ -3,6 +3,8 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import PinSelection from './Components/PinSelection';
 import Scoreboard from './Components/Scoreboard';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 
 function App() {
   // eslint-disable-next-line
@@ -17,10 +19,6 @@ function App() {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [spare, setSpare] = useState(false);
-  // eslint-disable-next-line
-  const [strike, setStrike] = useState(false);
-  // eslint-disable-next-line
-  const [strikeCount, setStrikeCount] = useState(2);
   // eslint-disable-next-line
   const [strikeOrSpareFrames, setStrikeOrSpareFrames] = useState({});
 
@@ -40,10 +38,13 @@ function App() {
         spare_first_shot: null
       };
     }
-    if (shot === 1 && Number(e) && frame === "10") {
+    if (shot === 1 && typeof Number(e) === "number" && frame === "10") {
       frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
     }
-    if (shot === 1 && frame !== "10" && Number(e) === 0) {
+    if (shot === 1 && typeof Number(e) === "number" && frame === "10") {
+      frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
+    }
+    if (shot === 1 && frame !== "10" && e === "0") {
       frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
     }
     if (shot === 1 && Number(e) && !strike && frame !== "10") {
@@ -81,6 +82,11 @@ function App() {
     setScore(Number(document.getElementById(`${frameResult}-frame-result`).innerText));
   }
 
+
+  /*  
+  THIS COULD USE SOME REFACTORING:
+  Realized to look at the sport in stages near the end and solved many problems.
+  */
   const checkForBonus = (e) => {
     // SPARES
     if (spare && shot === 2 && document.getElementById(`${frame}-last-shot`).innerText === "") {
@@ -109,17 +115,17 @@ function App() {
       setScore(Number(document.getElementById(`${frame}-frame-result`).innerText));
       setSpare(false);
     }
-    
+
     // STRIKES
     if (Number(frame) > 2 && frameScore[(Number(frame) - 1).toString()].strike && frameScore[frame].totalScore === 0) {
       frameScore[(Number(frame) - 1).toString()].strike_second_shot = 0;
-      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = 10 + score; 
-      document.getElementById(`${frame}-frame-result`).innerText = 10 + score; 
+      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = 10 + score;
+      document.getElementById(`${frame}-frame-result`).innerText = 10 + score;
       setScore(10 + score);
     } else {
 
       if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && document.getElementById(`${frame}-frame-result`).innerText === "" && frameScore[frame].firstShot && frameScore[frame].secondShot && frameScore[frame].lastShot) {
-        document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = 10 + score; 
+        document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = 10 + score;
         setScore(score + 10);
       }
       if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]) {
@@ -155,13 +161,27 @@ function App() {
         document.getElementById(`${(Number(frame) - 2).toString()}-frame-result`).innerText = frameScore[(Number(frame) - 2).toString()].totalScore;
         setScore(frameScore[(Number(frame) - 2).toString()].totalScore);
       }
-      
+
       if (frame === "10" && frameScore[(Number(frame) - 2).toString()].totalScore === null && frameScore[(Number(frame) - 2).toString()].strike) {
         frameScore[(Number(frame) - 2).toString()].totalScore = shotScores[frameScore[frame].firstShot.shotNumber + 1] + shotScores[frameScore[frame].secondShot.shotNumber + 2];
-        
+
+      }
+
+      if (Number(frame) > 2 && frameScore[(Number(frame) - 1).toString()].strike && shotScores[totalShots] < 10 && frameScore[frame].lastShot && shotScores[totalShots] === frameScore[frame].lastShot.score) {
+        frameScore[(Number(frame) - 1).toString()].totalScore = frameScore[frame].firstShot.score + frameScore[frame].lastShot.score + score;
+        document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = score + frameScore[frame].firstShot.score + frameScore[frame].lastShot.score + 10;
+        document.getElementById(`${frame}-frame-result`).innerText = score + frameScore[frame].firstShot.score + frameScore[frame].lastShot.score + 10;
+        setScore(score + frameScore[frame].firstShot.score + frameScore[frame].lastShot.score + 10);
+      }
+
+      if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[totalShots] < 10 && frameScore[frame].secondShot && shotScores[totalShots] === frameScore[frame].secondShot.score) {
+        frameScore[(Number(frame) - 1).toString()].totalScore = frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + score;
+        document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = score + frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + 10;
+        document.getElementById(`${frame}-frame-result`).innerText = score + frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + 10;
+        setScore(score + frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + 10);
       }
     }
-      
+
   }
 
   const scoreKeeper = (e) => {
@@ -229,7 +249,7 @@ function App() {
           updateFrame(frame, e, 2, false, false);
           checkForBonus();
           setShot(1);
-          if (frameScore[(Number(frame) - 1).toString()].strike) frameResult(frame);
+          if (!frameScore[(Number(frame) - 1).toString()].strike) frameResult(frame);
           setGameOver(true);
         } else {
           if ((document.getElementById(`${frame}-first-shot`).innerText === "X" ||
@@ -288,6 +308,11 @@ function App() {
     }
   }
 
+  const refresh = ()=>{
+      // re-renders the component
+      window.location.reload();
+  }
+
   useEffect(() => {
     setTotalShots(totalShots + 1);
     if (frame !== "10") checkForBonus();
@@ -296,8 +321,8 @@ function App() {
 
   return (
     <div className="App">
-      <button>Reset</button>
       <div id="bowling-pins">
+        <Button onClick={refresh} variant="danger">Reset</Button>
         <div className="pins" id="pin-10"></div>
         <div className="pins" id="pin-9"></div>
         <div className="pins" id="pin-8"></div>
