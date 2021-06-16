@@ -9,13 +9,18 @@ import Scoreboard from './Components/Scoreboard';
 //   expect(linkElement).toBeInTheDocument();
 // });
 
-it('renders the Scoreboard', () => {
+test('renders the Scoreboard', () => {
   render(<Scoreboard />);
   const divElement = screen.getByTestId('Scoreboard');
 
   expect(divElement).toBeInTheDocument();
 })
 
+test('ScoreBoard frames are empty on initialization', () => {
+  render(<Scoreboard />);
 
+  
+
+})
 
 

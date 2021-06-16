@@ -8,7 +8,17 @@ import Button from 'react-bootstrap/Button';
 
 function App() {
   // eslint-disable-next-line
-  const [pins, setPins] = useState(10);
+  const [pins, setPins] = useState([
+  <div className="pins" id="pin-10"></div>,
+  <div className="pins" id="pin-9"></div>,
+  <div className="pins" id="pin-8"></div>,
+  <div className="pins" id="pin-7"></div>,
+  <div className="pins" id="pin-6"></div>,
+  <div className="pins" id="pin-5"></div>,
+  <div className="pins" id="pin-4"></div>,
+  <div className="pins" id="pin-3"></div>,
+  <div className="pins" id="pin-2"></div>,
+  <div className="pins" id="pin-1"></div>]);
   const [frame, setFrame] = useState("1");
   const [shot, setShot] = useState(1);
   const [totalShots, setTotalShots] = useState(0);
@@ -224,6 +234,7 @@ function App() {
         strikeOrSpareFrames[frame] = "X";
         checkForBonus();
         setShot(shot + 1);
+        setTimeout(resetPins, 1000); 
       } else {
         if (shot === 2 &&
           (Number(e) + Number(document.getElementById(`${frame}-first-shot`).innerText) === 10)) {
@@ -234,6 +245,7 @@ function App() {
           updateFrame(frame, e, 2, true, false);
           checkForBonus();
           setShot(shot + 1);
+          setTimeout(resetPins, 1000); 
         }
         if (shot === 2 && Number(e) === 10) {
           document.getElementById(`${frame}-second-shot`).innerText = "X";
@@ -242,6 +254,7 @@ function App() {
           strikeOrSpareFrames[frame] = "X";
           checkForBonus();
           setShot(shot + 1);
+          setTimeout(resetPins, 1000); 
         }
         if (shot === 2 && (Number(e) + Number(document.getElementById(`${frame}-first-shot`).innerText)) !== 10 && Number(e) !== 10) {
           document.getElementById(`${frame}-second-shot`).innerText = e;
@@ -281,6 +294,7 @@ function App() {
         setShot(1);
         checkForBonus();
         setFrame((Number(frame) + 1).toString());
+        setTimeout(resetPins, 1000);
       } else {
         if (shot === 2 && (Number(e) + Number(document.getElementById(`${frame}-first-shot`).innerText) < 10)) {
           document.getElementById(`${frame}-last-shot`).innerText = e;
@@ -290,6 +304,7 @@ function App() {
           frameResult(frame);
           checkForBonus();
           setFrame((Number(frame) + 1).toString());
+          setTimeout(resetPins, 1000);
         }
         if (shot === 2 &&
           (Number(e) + Number(document.getElementById(`${frame}-first-shot`).innerText) === 10)) {
@@ -303,14 +318,35 @@ function App() {
           setShot(1);
           checkForBonus();
           setFrame((Number(frame) + 1).toString());
+          setTimeout(resetPins, 1000);
         }
       }
     }
   }
 
-  const refresh = ()=>{
-      // re-renders the component
-      window.location.reload();
+  const refresh = () => {
+    // re-renders the webpage, not optimal.
+    window.location.reload();
+  }
+
+  const removePins = (e) => {
+    if (Number(e) <= pins.length) {
+      setPins(pins.reverse().splice(Number(e), pins.length - 1).reverse());
+    }
+  }
+
+  const resetPins = () => {
+    setPins([
+      <div className="pins" id="pin-10"></div>,
+      <div className="pins" id="pin-9"></div>,
+      <div className="pins" id="pin-8"></div>,
+      <div className="pins" id="pin-7"></div>,
+      <div className="pins" id="pin-6"></div>,
+      <div className="pins" id="pin-5"></div>,
+      <div className="pins" id="pin-4"></div>,
+      <div className="pins" id="pin-3"></div>,
+      <div className="pins" id="pin-2"></div>,
+      <div className="pins" id="pin-1"></div>]);
   }
 
   useEffect(() => {
@@ -321,20 +357,14 @@ function App() {
 
   return (
     <div className="App">
+      <div style={{display:"flex", justifyContent:"center"}}>
+      <img id="logo" url="./public/sm_logo_noSM_DRK@3x.png" alt="" width="564px" height="100px"></img>
+      </div>
       <div id="bowling-pins">
         <Button onClick={refresh} variant="danger">Reset</Button>
-        <div className="pins" id="pin-10"></div>
-        <div className="pins" id="pin-9"></div>
-        <div className="pins" id="pin-8"></div>
-        <div className="pins" id="pin-7"></div>
-        <div className="pins" id="pin-6"></div>
-        <div className="pins" id="pin-5"></div>
-        <div className="pins" id="pin-4"></div>
-        <div className="pins" id="pin-3"></div>
-        <div className="pins" id="pin-2"></div>
-        <div className="pins" id="pin-1"></div>
+      {pins}
       </div>
-      <PinSelection scoreKeeper={scoreKeeper} />
+      <PinSelection scoreKeeper={scoreKeeper} removePins={removePins}/>
       {gameOver ?
         <div>
           <h1>Game Over</h1>
