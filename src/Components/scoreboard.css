@@ -1,7 +1,7 @@
 .ScoreBoard {
     display: flex;
     justify-content:center;
-    width: 1590px;
+    width: 100%;
     flex-wrap: wrap;
 }
 
@@ -23,10 +23,11 @@
     display: flex;
     width: 150px;
     height: 25px;
-    align-self: flex-start;
+    align-self: center;
     justify-content: center;
     border-style: solid;
     border-color:crimson;
+    border-radius: 6px;
 }
 
 #frame-score-container {

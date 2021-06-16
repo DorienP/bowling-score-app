@@ -7,16 +7,58 @@
 }
 
 #bowling-pins {
+  position: relative;
   height: 500px;
   width: 900px;
   margin-bottom: 20px;
   background-image: url(./public/6-69239_bowling-lane-clip-art-free-bowling-alley-without.png);
 }
 
-#pin-1 {
+.pins {
   position: absolute;
 
   background-image: url(./public/singlePin.png);
   width: 90px;
   height: 90px;
+}
+
+#pin-1 {
+  left: 403px;
+  top: 50px;
+}
+#pin-2 {
+  left: 379px;
+  top: 42px;
+}
+#pin-3 {
+  left: 427px;
+  top: 42px;
+}
+#pin-4 {
+  left: 453px;
+  top: 34px;
+}
+#pin-5 {
+  left: 403px;
+  top: 34px;
+}
+#pin-6 {
+  left: 353px;
+  top: 34px;
+}
+#pin-7 {
+  left: 328px;
+  top: 20px;
+}
+#pin-8 {
+  left: 379px;
+  top: 20px;
+}
+#pin-9 {
+  left: 426px;
+  top: 20px;
+}
+#pin-10 {
+left: 478px;
+    top: 20px;
 }

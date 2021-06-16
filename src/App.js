@@ -25,7 +25,7 @@ function App() {
   const [strikeOrSpareFrames, setStrikeOrSpareFrames] = useState({});
 
 
-  const updateFrame = (frame, e, shot, spare=false, strike=false) => {
+  const updateFrame = (frame, e, shot, spare = false, strike = false) => {
     if (frameScore[frame] === undefined) {
       frameScore[frame] = {
         frame: frame,
@@ -42,11 +42,11 @@ function App() {
     }
     if (shot === 1 && Number(e) && frame === "10") {
       frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
-    } 
+    }
     if (shot === 1 && frame !== "10" && Number(e) === 0) {
       frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
     }
-    if (shot === 1 && Number(e) && !strike &&  frame !== "10") {
+    if (shot === 1 && Number(e) && !strike && frame !== "10") {
       frameScore[frame].firstShot = { shotNumber: totalShots, score: Number(e) };
     } else if (strike && frame !== "10") {
       frameScore[frame].lastShot = { shotNumber: totalShots, score: Number(e) };
@@ -64,7 +64,7 @@ function App() {
     }
     if (shot === 2 && frame !== "10" && frameScore[frame].lastShot.score < 10 && frameScore[frame].lastShot !== null) {
       frameScore[frame].totalScore = frameScore[frame].lastShot.score + frameScore[frame].firstShot.score;
-    } 
+    }
     if (frameScore[frame].lastShot !== null && frame === "10") {
       frameScore[frame].totalScore = frameScore[frame].lastShot.score + frameScore[frame].firstShot.score + frameScore[frame].secondShot.score;
     }
@@ -75,13 +75,13 @@ function App() {
     const frameResult = e;
     if (frame === "10" && document.getElementById(`${frameResult}-second-shot`).innerText !== "") {
       document.getElementById(`${frameResult}-frame-result`).innerText = (Number(document.getElementById(`${frameResult}-first-shot`).innerText) + Number(document.getElementById(`${frameResult}-second-shot`).innerText) + score);
-    }else {
+    } else {
       document.getElementById(`${frameResult}-frame-result`).innerText = (Number(document.getElementById(`${frameResult}-first-shot`).innerText) + Number(document.getElementById(`${frameResult}-last-shot`).innerText) + score);
     }
     setScore(Number(document.getElementById(`${frameResult}-frame-result`).innerText));
   }
 
-  const checkForBonus = () => {
+  const checkForBonus = (e) => {
     // SPARES
     if (spare && shot === 2 && document.getElementById(`${frame}-last-shot`).innerText === "") {
       document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + Number(document.getElementById(`${frame}-first-shot`).innerText));
@@ -111,52 +111,62 @@ function App() {
     }
     
     // STRIKES
-    if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && document.getElementById(`${frame}-frame-result`).innerText === "" && frameScore[frame].firstShot && frameScore[frame].secondShot && frameScore[frame].lastShot) {
-      document.getElementById(`${frame}-frame-result`).innerText = 30 + score;
-    }
-    if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]) {
-      frameScore[(frame - 1).toString()].strike_first_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]
-    }
-    if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] && document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText === "") {
-      frameScore[(Number(frame) - 1).toString()].strike_second_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2]
-      if (frameScore[(Number(frame) - 1).toString()].strike_first_shot && frameScore[(Number(frame) - 1).toString()].strike_second_shot) {
-        document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + score + 10;
-        setScore(score + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + 10);
+    if (Number(frame) > 2 && frameScore[(Number(frame) - 1).toString()].strike && frameScore[frame].totalScore === 0) {
+      frameScore[(Number(frame) - 1).toString()].strike_second_shot = 0;
+      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = 10 + score; 
+      document.getElementById(`${frame}-frame-result`).innerText = 10 + score; 
+      setScore(10 + score);
+    } else {
+
+      if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && document.getElementById(`${frame}-frame-result`).innerText === "" && frameScore[frame].firstShot && frameScore[frame].secondShot && frameScore[frame].lastShot) {
+        document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = 10 + score; 
+        setScore(score + 10);
+      }
+      if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]) {
+        frameScore[(frame - 1).toString()].strike_first_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]
+      }
+      if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] && document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText === "") {
+        frameScore[(Number(frame) - 1).toString()].strike_second_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2]
+        if (frameScore[(Number(frame) - 1).toString()].strike_first_shot && frameScore[(Number(frame) - 1).toString()].strike_second_shot) {
+          document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + score + 10;
+          setScore(score + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + 10);
+        }
+      }
+      if (frame !== "1" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]) {
+        frameScore[(frame - 1).toString()].strike_first_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]
+      }
+      if (frame !== "1" && frame !== "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2]) {
+        frameScore[(Number(frame) - 1).toString()].strike_second_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2]
+        if (frameScore[(Number(frame) - 1).toString()].strike_first_shot && frameScore[(Number(frame) - 1).toString()].strike_second_shot) {
+          document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + score + 10;
+          setScore(score + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + 10);
+        }
+      }
+      if (Number(frame) > 2 && frameScore[(Number(frame) - 2).toString()].totalScore === null && frameScore[(Number(frame) - 2).toString()].strike) {
+        if (strikeOrSpareFrames[Number(frame) - 1] === "X" && strikeOrSpareFrames[Number(frame)] === "X") {
+          frameScore[(frame - 2).toString()].totalScore = 30 + score;
+          document.getElementById(`${(Number(frame) - 2).toString()}-frame-result`).innerText = 30 + score;
+          setScore(score + 30);
+        }
+      }
+      if (Number(frame) > 2 && frameScore[(Number(frame) - 2).toString()].strike && frameScore[(Number(frame) - 2).toString()].strike_second_shot === null) {
+        frameScore[(Number(frame) - 2).toString()].strike_second_shot = shotScores[frameScore[(Number(frame) - 2).toString()].lastShot.shotNumber + 2];
+        frameScore[(Number(frame) - 2).toString()].totalScore = frameScore[(Number(frame) - 2).toString()].strike_first_shot + frameScore[(Number(frame) - 2).toString()].strike_second_shot + score + 10;
+        document.getElementById(`${(Number(frame) - 2).toString()}-frame-result`).innerText = frameScore[(Number(frame) - 2).toString()].totalScore;
+        setScore(frameScore[(Number(frame) - 2).toString()].totalScore);
+      }
+      
+      if (frame === "10" && frameScore[(Number(frame) - 2).toString()].totalScore === null && frameScore[(Number(frame) - 2).toString()].strike) {
+        frameScore[(Number(frame) - 2).toString()].totalScore = shotScores[frameScore[frame].firstShot.shotNumber + 1] + shotScores[frameScore[frame].secondShot.shotNumber + 2];
+        
       }
     }
-    if (frame !== "1" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]) {
-      frameScore[(frame - 1).toString()].strike_first_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]
-    }
-    if (frame !== "1" && frame !== "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2]) {
-      frameScore[(Number(frame) - 1).toString()].strike_second_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2]
-      if (frameScore[(Number(frame) - 1).toString()].strike_first_shot && frameScore[(Number(frame) - 1).toString()].strike_second_shot) {
-        document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + score + 10;
-        setScore(score + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + 10);
-      }
-    }
-    if (Number(frame) > 2 && frameScore[(Number(frame) - 2).toString()].totalScore === null && frameScore[(Number(frame) - 2).toString()].strike) {
-      if (strikeOrSpareFrames[Number(frame) - 1] === "X" && strikeOrSpareFrames[Number(frame)] === "X") {
-        frameScore[(frame - 2).toString()].totalScore = 30 + score;
-        document.getElementById(`${(Number(frame) - 2).toString()}-frame-result`).innerText = 30 + score;
-        setScore(score + 30);
-      }
-    }
-    if (Number(frame) > 2 && frameScore[(Number(frame) - 2).toString()].strike && frameScore[(Number(frame) - 2).toString()].strike_second_shot === null) {
-      frameScore[(Number(frame) - 2).toString()].strike_second_shot = shotScores[frameScore[(Number(frame) - 2).toString()].lastShot.shotNumber + 2];
-      frameScore[(Number(frame) - 2).toString()].totalScore = frameScore[(Number(frame) - 2).toString()].strike_first_shot + frameScore[(Number(frame) - 2).toString()].strike_second_shot + score + 10;
-      document.getElementById(`${(Number(frame) - 2).toString()}-frame-result`).innerText = frameScore[(Number(frame) - 2).toString()].totalScore;
-      setScore(frameScore[(Number(frame) - 2).toString()].totalScore);
-    }
-
-    if (frame === "10" && frameScore[(Number(frame) - 2).toString()].totalScore === null && frameScore[(Number(frame) - 2).toString()].strike) {
-      frameScore[(Number(frame) - 2).toString()].totalScore = shotScores[frameScore[frame].firstShot.shotNumber + 1] + shotScores[frameScore[frame].secondShot.shotNumber + 2];
-
-    }
-
+      
   }
 
   const scoreKeeper = (e) => {
     // TENTH FRAME
+    debugger;
     if (frame === "10") {
       if (shot === 1 && e === "0") {
         document.getElementById(`${frame}-first-shot`).innerText = e;
@@ -219,7 +229,7 @@ function App() {
           updateFrame(frame, e, 2, false, false);
           checkForBonus();
           setShot(1);
-          frameResult(frame);
+          if (frameScore[(Number(frame) - 1).toString()].strike) frameResult(frame);
           setGameOver(true);
         } else {
           if ((document.getElementById(`${frame}-first-shot`).innerText === "X" ||
@@ -235,12 +245,11 @@ function App() {
       }
       // NOT TENTH FRAME
     } else {
-      debugger;
       if (shot === 1 && e !== "10") {
         document.getElementById(`${frame}-first-shot`).innerText = e;
         shotScores[totalShots] = Number(e);
         updateFrame(frame, e, 1, false, false);
-        checkForBonus();
+        checkForBonus(e);
         setShot(shot + 1);
       }
       if (shot === 1 && Number(e) === 10) {
@@ -282,20 +291,29 @@ function App() {
   useEffect(() => {
     setTotalShots(totalShots + 1);
     if (frame !== "10") checkForBonus();
-    console.log(frameScore, shotScores)
     // eslint-disable-next-line
   }, [shot])
 
   return (
     <div className="App">
+      <button>Reset</button>
       <div id="bowling-pins">
-      <div id="pin-1"></div>
+        <div className="pins" id="pin-10"></div>
+        <div className="pins" id="pin-9"></div>
+        <div className="pins" id="pin-8"></div>
+        <div className="pins" id="pin-7"></div>
+        <div className="pins" id="pin-6"></div>
+        <div className="pins" id="pin-5"></div>
+        <div className="pins" id="pin-4"></div>
+        <div className="pins" id="pin-3"></div>
+        <div className="pins" id="pin-2"></div>
+        <div className="pins" id="pin-1"></div>
       </div>
       <PinSelection scoreKeeper={scoreKeeper} />
-      {gameOver ? 
-      <div>
-        <h1>Game Over</h1> 
-      </div> : null
+      {gameOver ?
+        <div>
+          <h1>Game Over</h1>
+        </div> : null
       }
       <Scoreboard gameOver={gameOver} setGameOver={setGameOver} />
     </div>
