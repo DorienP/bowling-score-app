@@ -18,5 +18,10 @@
 
 ## Challenges Faced
 1. Could have planned the sport into stages rather than having to refactor later.
-2. should have stuck with testing first, had all the cases thought out just rushed it in the end.
-3. Spent a lot of time struggling rather than doing quick research and lookup.
+2. Should have stuck with testing first, had all the cases thought out just rushed it in the end.
+3. Math Algo for scoring system was very logical rather than mathematical, would like to refactor.
+
+## Future Goals / Tech Debt
+1. Adding a second scoreboard and two player names.  
+2. Adapt bowling lane and pins into mini game with a bowling ball and simple physics.
+3. Adding disable attribute to components.
