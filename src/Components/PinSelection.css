@@ -1,7 +1,7 @@
 #Pin-Button-Container {
     display: flex;
     justify-content: space-between;
-    width: 56%;
+    width: 900px;
     margin-bottom: 20px;
 }
 
