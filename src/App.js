@@ -105,7 +105,7 @@ function App() {
       setSpare(false);
     }
     if (spare && frame !== "10" && shot === 1 && document.getElementById(`${frame}-last-shot`).innerText === "X") {
-      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + 20);
+      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + 10);
       setScore(Number(document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText));
       setSpare(false);
     }
@@ -114,9 +114,9 @@ function App() {
       setScore(Number(document.getElementById(`${frame}-frame-result`).innerText));
       setSpare(false);
     }
-    if (spare && frame === "10" && shot === 1 && document.getElementById(`${frame}-last-shot`).innerText === "X") {
-      document.getElementById(`${frame}-frame-result`).innerText = (score + 10);
-      setScore(Number(document.getElementById(`${frame}-frame-result`).innerText));
+    if (spare && frame === "10" && shot === 1 && document.getElementById(`${frame}-first-shot`).innerText === "X") {
+      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + 10);
+      setScore(Number(document.getElementById(`${frame}-frame-result`).innerText) + score + 10);
       setSpare(false);
     }
     if (!spare && frame === "10" && shot === 3 && document.getElementById(`${frame}-last-shot`).innerText !== "") {
