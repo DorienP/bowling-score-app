@@ -191,7 +191,7 @@ function App() {
 
       }
 
-      if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[totalShots] + shotScores[totalShots - 1] !== 10 && frameScore[frame].secondShot && shotScores[totalShots] === frameScore[frame].secondShot.score && Number(document.getElementById(`${frame}-first-shot`).innerText) !== 10) {
+      if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[totalShots] + shotScores[totalShots - 1] < 10 && frameScore[frame].secondShot && shotScores[totalShots] === frameScore[frame].secondShot.score && Number(document.getElementById(`${frame}-first-shot`).innerText) !== 10) {
         frameScore[(Number(frame) - 1).toString()].totalScore = frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + score;
         document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = score + frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + 10;
         document.getElementById(`${frame}-frame-result`).innerText = score + frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + 10;
