@@ -99,7 +99,7 @@ function App() {
   */
   const checkForBonus = (e) => {
     // SPARES
-    if (spare && shot === 2 && document.getElementById(`${frame}-last-shot`).innerText === "") {
+    if (spare && shot === 2 && document.getElementById(`${frame}-last-shot`).innerText === "" && frame !== "10") {
       document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + Number(document.getElementById(`${frame}-first-shot`).innerText));
       setScore(Number(document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText));
       setSpare(false);
@@ -123,6 +123,11 @@ function App() {
 
       document.getElementById(`${frame}-frame-result`).innerText = (score + frameScore[frame].totalScore);
       setScore(Number(document.getElementById(`${frame}-frame-result`).innerText));
+      setSpare(false);
+    }
+    if (spare && frame === "10" && shotScores[totalShots] === 0) {
+      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + 10);
+      setScore(Number(document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText));
       setSpare(false);
     }
 
@@ -228,7 +233,7 @@ function App() {
           setGameOver(true);
         }
       }
-      if (shot === 1 && e !== "10") {
+      else if (shot === 1 && e !== "10") {
         document.getElementById(`${frame}-first-shot`).innerText = e;
         shotScores[totalShots] = Number(e);
         updateFrame(frame, e, 1, false, false);
@@ -271,7 +276,7 @@ function App() {
           checkForBonus();
           if (frameScore[frame].firstShot.score === 10 || frameScore[frame].secondShot.score + frameScore[frame].firstShot.score === 10) {
             setShot(shot + 1);
-          } else {
+          } else if (shotScores[totalShots] !== 0 || shotScores[totalShots - 1] !== 0) {
             frameResult(frame);
             setShot(1);
             setGameOver(true);
@@ -380,6 +385,7 @@ function App() {
   useEffect(() => {
     setTotalShots(totalShots + 1);
     if (frame !== "10") checkForBonus();
+    console.log(score);
     // eslint-disable-next-line
   }, [shot])
 
