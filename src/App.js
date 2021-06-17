@@ -105,7 +105,7 @@ function App() {
       setSpare(false);
     }
     if (spare && frame !== "10" && shot === 1 && document.getElementById(`${frame}-last-shot`).innerText === "X") {
-      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + 10);
+      document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + 20);
       setScore(Number(document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText));
       setSpare(false);
     }
@@ -116,7 +116,7 @@ function App() {
     }
     if (spare && frame === "10" && shot === 1 && document.getElementById(`${frame}-first-shot`).innerText === "X") {
       document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = (score + 20);
-      setScore(Number(document.getElementById(`${frame}-frame-result`).innerText) + score + 10);
+      setScore(Number(document.getElementById(`${frame}-frame-result`).innerText) + score + 20);
       setSpare(false);
     }
     if (!spare && frame === "10" && shot === 3 && document.getElementById(`${frame}-last-shot`).innerText !== "") {
@@ -155,6 +155,7 @@ function App() {
         frameScore[(Number(frame) - 1).toString()].strike_second_shot = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2]
         if (frameScore[(Number(frame) - 1).toString()].strike_first_shot && frameScore[(Number(frame) - 1).toString()].strike_second_shot) {
           document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + score + 10;
+          frameScore[(Number(frame) - 1).toString()].totalScore = shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + score + 10;
           setScore(score + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1] + shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 2] + 10);
         }
       } else if (Number(frame) > 2 && frame !== "10" && shot !== 3 && frameScore[(Number(frame) - 1).toString()].strike && shotScores[totalShots] < 10 && frameScore[frame].lastShot && shotScores[totalShots] === frameScore[frame].lastShot.score) {
@@ -195,6 +196,7 @@ function App() {
 
     if (frame === "10" && shot === 3 && frameScore[frame].firstShot && frameScore[frame].secondShot) {
       frameScore[frame].totalScore = frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + frameScore[frame].lastShot.score + score;
+      document.getElementById(`${frame}-last-shot`).innerText = frameScore[frame].lastShot.score;
       document.getElementById(`${frame}-frame-result`).innerText = frameScore[frame].totalScore;
     }
 
