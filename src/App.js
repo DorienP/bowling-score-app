@@ -135,7 +135,7 @@ function App() {
     } else {
 
       if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && document.getElementById(`${frame}-frame-result`).innerText === "" && frameScore[frame].firstShot && frameScore[frame].secondShot && frameScore[frame].lastShot) {
-        document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = 10 + score;
+        document.getElementById(`${frame}-frame-result`).innerText = 10 + score;
         setScore(score + 10);
       }
       if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[frameScore[(Number(frame) - 1).toString()].lastShot.shotNumber + 1]) {
@@ -186,7 +186,7 @@ function App() {
 
       }
 
-      if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[totalShots] < 10 && frameScore[frame].secondShot && shotScores[totalShots] === frameScore[frame].secondShot.score && Number(document.getElementById(`${frame}-first-shot`).innerText) !== 10) {
+      if (frame === "10" && frameScore[(Number(frame) - 1).toString()].strike && shotScores[totalShots] + shotScores[totalShots - 1] !== 10 && frameScore[frame].secondShot && shotScores[totalShots] === frameScore[frame].secondShot.score && Number(document.getElementById(`${frame}-first-shot`).innerText) !== 10) {
         frameScore[(Number(frame) - 1).toString()].totalScore = frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + score;
         document.getElementById(`${(Number(frame) - 1).toString()}-frame-result`).innerText = score + frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + 10;
         document.getElementById(`${frame}-frame-result`).innerText = score + frameScore[frame].firstShot.score + frameScore[frame].secondShot.score + 10;
